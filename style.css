@@ -855,7 +855,15 @@ section {
     padding: var(--spacing-8) 0;
     border-top: 1px solid #444;
 }
-
+/* Dark Theme */
+.dark-theme {
+    --background: 210 11% 8%;
+    --surface: 210 11% 12%;
+    --text-primary: 210 11% 95%;
+    --text-secondary: 210 9% 75%;
+    --text-muted: 210 8% 65%;
+    --border: 210 14% 20%;
+}
 .social-link .x-logo {
     width: 1.25rem;
     height: 1.25rem;
