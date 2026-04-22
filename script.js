@@ -283,10 +283,10 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.appendChild(themeToggle);
         
         themeToggle.addEventListener('click', function() {
-            document.body.classList.toggle('dark-theme');
+           document.documentElement.classList.toggle('dark-theme');
             const icon = this.querySelector('i');
             
-            if (document.body.classList.contains('dark-theme')) {
+            if (document.documentElement.classList.contains('dark-theme')) {
                 icon.className = 'fas fa-sun';
                 localStorage.setItem('theme', 'dark');
             } else {
@@ -295,12 +295,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Load saved theme
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
+        // Sync icon with current theme (dark is the default)
+        if (document.documentElement.classList.contains('dark-theme')) {
             document.body.classList.add('dark-theme');
             themeToggle.querySelector('i').className = 'fas fa-sun';
-        }
+        } else {
+            themeToggle.querySelector('i').className = 'fas fa-moon';
     }
 
     // Back to top button
