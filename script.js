@@ -283,10 +283,10 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.appendChild(themeToggle);
         
         themeToggle.addEventListener('click', function() {
-           document.documentElement.classList.toggle('dark-theme');
+            document.body.classList.toggle('dark-theme');
             const icon = this.querySelector('i');
-            
-            if (document.documentElement.classList.contains('dark-theme')) {
+
+            if (document.body.classList.contains('dark-theme')) {
                 icon.className = 'fas fa-sun';
                 localStorage.setItem('theme', 'dark');
             } else {
@@ -294,13 +294,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 localStorage.setItem('theme', 'light');
             }
         });
-        
-        // Sync icon with current theme (dark is the default)
-        if (document.documentElement.classList.contains('dark-theme')) {
+
+        // Load saved theme — default to DARK on first visit
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            document.body.classList.remove('dark-theme');
+            themeToggle.querySelector('i').className = 'fas fa-moon';
+        } else {
             document.body.classList.add('dark-theme');
             themeToggle.querySelector('i').className = 'fas fa-sun';
-        } else {
-            themeToggle.querySelector('i').className = 'fas fa-moon';
+        }
     }
 
     // Back to top button
@@ -444,15 +447,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 transform: scale(4);
                 opacity: 0;
             }
-        }
-        
-        .dark-theme {
-            --background: 210 11% 8%;
-            --surface: 210 11% 12%;
-            --text-primary: 210 11% 95%;
-            --text-secondary: 210 9% 75%;
-            --text-muted: 210 8% 65%;
-            --border: 210 14% 20%;
         }
     `;
     document.head.appendChild(rippleStyles);
